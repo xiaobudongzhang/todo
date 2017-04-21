@@ -1,0 +1,37 @@
+weba:
+  build: ./web
+  expose: 
+     - 5001
+
+webb:
+  build: ./web
+  expose:
+      - 5001
+
+webc:
+  build: ./web
+  expose: 
+      - 5001
+
+haproxy: 
+  image: 
+        haproxy:latest
+  volumes:  
+        - "haproxy:/haproxy-override"
+        - "/var/docker/compose-ha/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+
+  links: 
+        - weba
+        - webb
+        - webc
+
+
+  ports: 
+       - "8070:8070"
+       - "5001:5001"
+
+  expose: 
+       - "8070"
+       - "5001"
+
+  

@@ -1,0 +1,32 @@
+weba:
+  build:./web
+  expose:
+      - 5001
+
+
+webb:
+  build:./web
+  expose:
+      - 5001
+
+webc:
+  build:./web
+  expose:
+      - 5001
+
+haproxy:
+  image:haproxy:lastest
+  volumes:
+    - haproxy:/haproxy-override
+    - haproxy/haproxy.cfg:/usr/
+    links:
+        - weba
+        - webb
+        - webc
+    ports:
+       - "80:80"
+       - "5001:5001"
+    expose:
+       - "80"
+       - "5001"  
+  

@@ -1,0 +1,5 @@
+FROM php:7-cli
+WORKDIR ./
+ADD .  /compose
+EXPOSE 5001
+CMD php  -S  127.0.0.1:5001  -t /compose 
